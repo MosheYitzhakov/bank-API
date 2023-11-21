@@ -5,7 +5,7 @@ const pool = mysql.createPool({
     password: 'Sr0583261045',
     database: 'bank-API'
 })
- const checkDBConnection = async ()=>{
+const checkDBConnection = async () => {
     try {
         const connection = await pool.getConnection();
         console.log("db connected");
@@ -17,38 +17,61 @@ const pool = mysql.createPool({
         return false;
     }
 }
-const addUser = ()=>{
+const addUser = async (name, passport) => {
+    let sql = `
+    INSERT INTO accounts()
+    VALUE();
+`;
+    let [{ insertId }] = await pool.query(sql);
+
+console.log(insertId);
+    sql = `
+    INSERT INTO users (name, passport, id_account)
+    VALUES (?, ?,?)
+`;
+    [{ insertId }] = await pool.query(sql, [name, passport, insertId]);
+console.log(insertId);
+    return getUser(insertId);
+}
+
+const depositing = () => {    // הפקדה
 
 }
 
-const depositing = ()=>{    // הפקדה
+const updateCredit = () => {
 
 }
 
-const updateCredit = ()=>{
+const withdrawMoney = () => { // משיכת כספים
 
 }
-
-const withdrawMoney = ()=>{ // משיכת כספים
-
-}
-const transferring = ()=>{  //  ע"י אשראי עברת כספים לחשבון אחר
+const transferring = () => {  //  ע"י אשראי עברת כספים לחשבון אחר
 
 }
-const getUser =async (id)=>{
+const getUser = async (id) => {
     const sql = `
     SELECT *
     FROM users
-    WHERE id = ?;
+    WHERE id_user = ?;
 `;
-const [[res]] = await pool.query(sql, [id]);
-return res;
+    const [[res]] = await pool.query(sql, [id]);
+    console.log(res);
+    return res;
 }
 
-const getAllUsers = ()=>{
+const getIdUserForName = async (name) => {
+    const sql = `
+    SELECT id_user
+    FROM users
+    WHERE name = ?;
+`;
+    const [[res]] = await pool.query(sql, [name]);
+    return res;
+}
+const getAllUsers = () => {
 
 }
-
+addUser('shimy',123123123)
 
 
 
