@@ -17,18 +17,34 @@ const checkDBConnection = async () => {
         return false;
     }
 }
-const addUser = async (name, passport) => {
+const getAllPassports =async () =>{
+    const sql = `
+    SELECT passport
+    FROM users`
+    const [res] =await pool.query(sql)
+    console.log(res);
+    return res 
+}
+const addUser = async (name, passportNew) => {
+    const allPassports= await getAllPassports()
+    
+    if (!allPassports.find(({ passport })=> passport === passportNew)) {
     let sql = `
     INSERT INTO accounts()
     VALUE();
 `;
     let [{ insertId }] = await pool.query(sql);
     sql = `
-    INSERT INTO users (name, passport, id_account)
+    INSERT INTO users (name, passportNew, id_account)
     VALUES (?, ?,?)
 `;
-    [{ insertId }] = await pool.query(sql, [name, passport, insertId]);
-    return getUser(passport);
+    [{ insertId }] = await pool.query(sql, [name, passportNew, insertId]);
+    return getUser(passportNew);
+
+    } else{
+        console.log(`user with this passport already exists`);
+       return(`user with this passport already exists`);
+    }
 }
 
 const depositing = async (passport, cash) => {
@@ -66,6 +82,7 @@ const withdrawMoney = async (passport, cash) => { // משיכת כספים
 const transferring = async (passport, numMoney, ohterName) => {  //  ע"י אשראי עברת כספים לחשבון אחר
     let { id_account } = await getUser(passport);
     let otherAccount = await getUser(await getIdUserForPassport(ohterName));
+    if(id_account && otherAccount){
     const sql2 = `
     UPDATE accounts
     SET credit = credit - ?
@@ -81,6 +98,10 @@ const transferring = async (passport, numMoney, ohterName) => {  //  ע"י אש�
         [{ affectedRows }] = await pool.query(sql, [numMoney, otherAccount.id_account]);
         if (affectedRows) return console.log('transferring');
     }
+    
+    } else{
+        return undefined
+     }
 }
 const getUser = async (passport) => {
     const sql = `
@@ -116,9 +137,12 @@ FROM users
     return res
 }
 const tast = async () => {
-    await depositing(123123123, 1250)
-    getAllUsers()
+    // await depositing(123123123, 1250)
+// const all = await  getAllUsers()
+// await addUser( 'shimy' , 123123123)
+getUser(12121221)
 }
+
 tast()
 
 
