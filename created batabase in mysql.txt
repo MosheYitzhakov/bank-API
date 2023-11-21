@@ -1,0 +1,25 @@
+CREATE SCHEMA `bank-api` ;
+
+CREATE TABLE `bank-api`.`uesers` (
+  `id_user` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `id_account_status` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id_user`));
+
+ALTER TABLE `bank-api`.`uesers` 
+CHANGE COLUMN `id_account_status` `id_account` INT NULL DEFAULT NULL ;
+
+CREATE TABLE `bank-api`.`accounts` (
+  `id_accounts` INT NOT NULL AUTO_INCREMENT,
+  `cash` DOUBLE NULL DEFAULT 0.0,
+  `credit` INT NULL DEFAULT 0,
+  PRIMARY KEY (`id_accounts`));
+
+ALTER TABLE `bank-api`.`uesers` 
+ADD COLUMN `passport` INT NOT NULL AFTER `name`;
+
+ALTER TABLE `bank-api`.`accounts` 
+CHANGE COLUMN `id_accounts` `id_account` INT NOT NULL AUTO_INCREMENT ;
+
+ALTER TABLE `bank-api`.`accounts` 
+CHANGE COLUMN `credit` `credit` DOUBLE NULL DEFAULT '0' ;
