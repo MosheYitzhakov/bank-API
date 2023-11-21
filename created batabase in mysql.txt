@@ -23,3 +23,6 @@ CHANGE COLUMN `id_accounts` `id_account` INT NOT NULL AUTO_INCREMENT ;
 
 ALTER TABLE `bank-api`.`accounts` 
 CHANGE COLUMN `credit` `credit` DOUBLE NULL DEFAULT '0' ;
+
+ALTER TABLE `bank-api`.`uesers` 
+RENAME TO  `bank-api`.`users` ;

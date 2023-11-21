@@ -35,12 +35,18 @@ const withdrawMoney = ()=>{ // משיכת כספים
 const transferring = ()=>{  //  ע"י אשראי עברת כספים לחשבון אחר
 
 }
-const showDetailsOfUser = ()=>{
-
+const getUser =async (id)=>{
+    const sql = `
+    SELECT *
+    FROM users
+    WHERE id = ?;
+`;
+const [[res]] = await pool.query(sql, [id]);
+return res;
 }
 
-const showDetailsOfAllUsers = ()=>{
-    
+const getAllUsers = ()=>{
+
 }
 
 
