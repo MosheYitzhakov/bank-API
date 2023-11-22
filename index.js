@@ -1,7 +1,18 @@
 
 const express = require('express')
 const app = express()
+const cors = require('cors')
 const {checkDBConnection } = require('./dbUsers.js') 
+
+
+app.use(express.json())
+app.use(cors())
+// Routes
+app.use('/api/users',)
+app.use('post/api/',)
+app.use('put/api/',)
+
+
 app.get('/', (req, res) => res.send('Hello World!'))
 
 

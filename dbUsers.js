@@ -46,7 +46,6 @@ const addUser = async (name, passportNew) => {
        return(`user with this passport already exists`);
     }
 }
-
 const depositing = async (passport, cash) => {
     const { id_account } = await getUser(passport);
     const sql = `
