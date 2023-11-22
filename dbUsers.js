@@ -140,7 +140,7 @@ const tast = async () => {
     // await depositing(123123123, 1250)
 // const all = await  getAllUsers()
 // await addUser( 'shimy' , 123123123)
-getUser(12121221)
+getUser(12121221);
 }
 
 tast()
